@@ -1,5 +1,6 @@
 import { createStore } from 'vuex'
 import api from '@/store/modules/api.js'
+import receipts from '@/store/modules/receipts.js'
 
 export default createStore({
   state: {},
@@ -7,5 +8,6 @@ export default createStore({
   actions: {},
   modules: {
     api,
+    receipts,
   },
 })

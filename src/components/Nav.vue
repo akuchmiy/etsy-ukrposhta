@@ -2,7 +2,7 @@
   <div class="navbar justify-content-center bg-light">
     <router-link class="h4" to="/">Home</router-link>
     <router-link class="h4" to="/about">About</router-link>
-    <router-link class="h4" to="/authorize">Authorize</router-link>
+    <router-link class="h4" to="/authorization">Authorize</router-link>
   </div>
 </template>
 

@@ -11,10 +11,10 @@
     },
     created() {
       if (
-        !window.location.href.endsWith('/authorize') &&
+        !window.location.href.endsWith('/authorization') &&
         !this.$store.state.api.accessToken
       ) {
-        window.location.assign('/authorize')
+        window.location.assign('/authorization')
       }
     },
   }

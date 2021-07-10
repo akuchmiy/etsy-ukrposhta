@@ -6,18 +6,21 @@
 </template>
 
 <script>
-  import ApiService from '@/service/APIService'
   import { mapState } from 'vuex'
   export default {
     computed: {
       ...mapState('api', ['accessToken', 'accessSecret']),
+      ...mapState('receipts', ['receipts']),
+    },
+    methods: {
+      logReceipts() {
+        console.log(this.receipts)
+      },
     },
     created() {
-      ApiService.getShopReceipts(
-        this.accessToken,
-        this.accessSecret,
-        25526257
-      ).then((response) => console.log(response))
+      this.$store
+        .dispatch('receipts/getReceipts')
+        .then(() => this.logReceipts())
     },
   }
 </script>
