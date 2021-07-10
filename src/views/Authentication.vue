@@ -25,7 +25,11 @@
           <input class="form-control" v-model="verifier" type="text" />
         </div>
         <div class="col-3">
-          <button class="btn btn-primary" @click="getAccess(verifier)">
+          <button
+            class="btn btn-primary"
+            @click="getAccess(verifier)"
+            :disabled="!verifier"
+          >
             Submit
           </button>
         </div>
@@ -87,7 +91,7 @@
         console.log('localStorage api data: ', apiKey, sharedSecret)
       }
 
-      this.getRequest()
+      // this.getRequest()
     },
   }
 </script>
