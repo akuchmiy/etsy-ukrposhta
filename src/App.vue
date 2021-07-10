@@ -5,7 +5,6 @@
 
 <script>
   import Nav from '@/components/Nav.vue'
-
   export default {
     components: {
       Nav,
@@ -13,7 +12,7 @@
     created() {
       if (
         !window.location.href.endsWith('/authorize') &&
-        !this.$store.state.accessToken
+        !this.$store.state.api.accessToken
       ) {
         window.location.assign('/authorize')
       }

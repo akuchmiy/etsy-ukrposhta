@@ -27,7 +27,7 @@
         <div class="col-3">
           <button
             class="btn btn-primary"
-            @click="getAccess(verifier)"
+            @click="getAccess"
             :disabled="!verifier"
           >
             Submit
@@ -43,54 +43,30 @@
 </template>
 
 <script>
-  import ApiService from '@/service/APIService'
-
   export default {
     name: 'Authentication',
     components: {},
     data() {
       return {
-        ***REMOVED***
-        ***REMOVED***
-        reqToken: '',
-        reqSecret: '',
         verifier: '',
         href: '',
       }
     },
     methods: {
       getRequest() {
-        return ApiService.getRequestToken(this.apiKey, this.sharedSecret)
-          .then((response) => {
-            this.href = response.data.authorizeUrl
-            this.reqToken = response.data.token
-            this.reqSecret = response.data.tokenSecret
+        this.$store
+          .dispatch('api/getRequestCredentials')
+          .then((credentials) => {
+            this.href = credentials.href
           })
-          .catch(() => (this.href = ''))
       },
-      getAccess(verifier) {
-        ApiService.getAccessToken(this.reqToken, this.reqSecret, verifier).then(
-          (response) => {
-            this.$store.state.accessToken = response.data.token
-            this.$store.state.accessSecret = response.data.tokenSecret
-            console.log(
-              'Access token + secret: ',
-              response.data.token,
-              response.data.tokenSecret
-            )
-          }
-        )
+      getAccess() {
+        this.$store
+          .dispatch('api/getAccessCredentials', this.verifier)
+          .then((response) => console.log(response))
       },
     },
     created() {
-      const apiKey = localStorage.getItem('api_key')
-      const sharedSecret = localStorage.getItem('shared_secret')
-      if (apiKey && sharedSecret) {
-        this.apiKey = apiKey
-        this.sharedSecret = sharedSecret
-        console.log('localStorage api data: ', apiKey, sharedSecret)
-      }
-
       // this.getRequest()
     },
   }

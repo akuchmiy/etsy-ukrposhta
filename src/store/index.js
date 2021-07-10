@@ -1,11 +1,11 @@
 import { createStore } from 'vuex'
+import api from '@/store/modules/api.js'
 
 export default createStore({
-  state: {
-    accessToken: '',
-    accessSecret: '',
-  },
+  state: {},
   mutations: {},
   actions: {},
-  modules: {},
+  modules: {
+    api,
+  },
 })
