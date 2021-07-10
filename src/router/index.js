@@ -20,7 +20,7 @@ const routes = [
   },
   {
     path: '/:pathMatch(.*)*',
-    name: 'Dima',
+    name: 'NotFound',
     component: NotFound,
   },
 ]

@@ -1,13 +1,13 @@
 import axios from 'axios'
 
-const apiClient = axios.create({
-  baseURL: 'https://openapi.etsy.com/v2',
-  withCredentials: false,
-  headers: {
-    Accept: 'application/json',
-    'Content-Type': 'application/json',
-  },
-})
+// const apiClient = axios.create({
+//   baseURL: 'https://openapi.etsy.com/v2',
+//   withCredentials: false,
+//   headers: {
+//     Accept: 'application/json',
+//     'Content-Type': 'application/json',
+//   },
+// })
 
 const serverClient = axios.create({
   baseURL: 'http://localhost:8000',
@@ -19,7 +19,7 @@ const serverClient = axios.create({
 })
 
 export default {
-  requestToken(api_key, shared_secret) {
+  getRequestToken(api_key, shared_secret) {
     return serverClient.get('/request', {
       params: {
         api_key,
@@ -27,7 +27,7 @@ export default {
       },
     })
   },
-  accessToken(req_token, req_secret, verifier) {
+  getAccessToken(req_token, req_secret, verifier) {
     return serverClient.get('/access', {
       params: {
         req_token,
@@ -36,7 +36,28 @@ export default {
       },
     })
   },
-  getReceipts() {
-    return apiClient.get('/shops/__SELF__/receipts')
+  getUserShopId(token, secret) {
+    return serverClient
+      .get('/get', {
+        params: {
+          path: '/users/__SELF__/shops',
+          token,
+          secret,
+          query: null,
+        },
+      })
+      .then((result) => result.data.body.results[0].shop_id)
+  },
+  getShopReceipts(token, secret, shopId) {
+    return serverClient
+      .get('/get', {
+        params: {
+          path: `/shops/${shopId}/receipts`,
+          token,
+          secret,
+          query: null,
+        },
+      })
+      .then((result) => result.data.body.results)
   },
 }

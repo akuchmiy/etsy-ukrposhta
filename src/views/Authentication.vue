@@ -60,7 +60,7 @@
     },
     methods: {
       getRequest() {
-        return ApiService.requestToken(this.apiKey, this.sharedSecret)
+        return ApiService.getRequestToken(this.apiKey, this.sharedSecret)
           .then((response) => {
             this.href = response.data.authorizeUrl
             this.reqToken = response.data.token
@@ -69,7 +69,7 @@
           .catch(() => (this.href = ''))
       },
       getAccess(verifier) {
-        ApiService.accessToken(this.reqToken, this.reqSecret, verifier).then(
+        ApiService.getAccessToken(this.reqToken, this.reqSecret, verifier).then(
           (response) => {
             this.$store.state.accessToken = response.data.token
             this.$store.state.accessSecret = response.data.tokenSecret

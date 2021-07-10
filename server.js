@@ -46,5 +46,20 @@ app.get('/access', function (req, res) {
     .catch(() => res.json({}))
 })
 
+app.get('/get', function (req, res) {
+  console.log(client)
+  let {
+    path,
+    token,
+    secret,
+    query
+  } = req.query
+
+  client.get('/v2' + path, query, token, secret).then(result => {
+    res.send(result)
+  })
+  
+})
+
 app.listen(port)
 console.log('Server started at http://localhost:' + port)

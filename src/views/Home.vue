@@ -5,7 +5,16 @@
 </template>
 
 <script>
-  export default {}
+  import ApiService from '@/service/APIService'
+  export default {
+    created() {
+      ApiService.getShopReceipts(
+        this.$store.state.accessToken,
+        this.$store.state.accessSecret,
+        25526257
+      ).then((response) => console.log(response))
+    },
+  }
 </script>
 
 <style scoped>
