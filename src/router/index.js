@@ -14,6 +14,11 @@ const routes = [
     component: () => import('../views/About.vue'),
   },
   {
+    path: '/authorize',
+    name: 'Authorization',
+    component: () => import('../views/Authentication.vue'),
+  },
+  {
     path: '/:pathMatch(.*)*',
     name: 'Dima',
     component: NotFound,

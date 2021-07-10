@@ -5,8 +5,11 @@
 </template>
 
 <script>
-  export default {
-    name: 'Home',
-    components: {},
-  }
+  export default {}
 </script>
+
+<style scoped>
+  div {
+    text-align: center;
+  }
+</style>
