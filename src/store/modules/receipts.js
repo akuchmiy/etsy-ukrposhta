@@ -4,7 +4,13 @@ export default {
   namespaced: true,
   state: () => ({
     shopId: null,
-    receipts: [],
+    receipts: [
+      // {
+      //   receipt_id: '00001',
+      //   name: 'Tolik Sutuliy',
+      //   city: 'Dublin',
+      // },
+    ],
   }),
   mutations: {
     SET_SHOP_ID(state, shopId) {
@@ -12,6 +18,12 @@ export default {
     },
     SET_RECEIPTS(state, receipts) {
       state.receipts = receipts
+    },
+    UPDATE_RECEIPT(state, newReceipt) {
+      const receipt = state.receipts.find(
+        (receipt) => receipt.receipt_id === newReceipt.receipt_id
+      )
+      Object.assign(receipt, newReceipt)
     },
   },
   actions: {
@@ -27,9 +39,20 @@ export default {
         rootState.api.accessSecret,
         state.shopId
       ).then((receipts) => {
-        console.log(receipts)
         commit('SET_RECEIPTS', receipts)
       })
+    },
+    updateReceipt({ state, commit }, newReceipt) {
+      if (!newReceipt.receipt_id) return
+
+      console.log('Hi from updateReceipt', newReceipt)
+      commit('UPDATE_RECEIPT', newReceipt)
+      console.log(state.receipts)
+    },
+  },
+  getters: {
+    getReceiptById: (state) => (receipt_id) => {
+      return state.receipts.find((receipt) => receipt.receipt_id === receipt_id)
     },
   },
 }

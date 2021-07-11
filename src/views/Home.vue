@@ -1,32 +1,31 @@
 <template>
-  <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png" />
+  <div class="container home">
+    <h1 class="text-center">Receipts</h1>
+    <p>
+      {{ accessToken }} <br />
+      {{ accessSecret }}
+    </p>
+    <ReceiptItem
+      v-for="receipt of receipts"
+      :key="receipt.receipt_id"
+      :receiptValue="receipt"
+    ></ReceiptItem>
   </div>
-  <p>{{ accessToken }} {{ accessSecret }}</p>
 </template>
 
 <script>
+  import ReceiptItem from '@/components/ReceiptItem.vue'
   import { mapState } from 'vuex'
   export default {
+    components: {
+      ReceiptItem,
+    },
     computed: {
       ...mapState('api', ['accessToken', 'accessSecret']),
       ...mapState('receipts', ['receipts']),
     },
-    methods: {
-      logReceipts() {
-        console.log(this.receipts)
-      },
-    },
-    created() {
-      this.$store
-        .dispatch('receipts/getReceipts')
-        .then(() => this.logReceipts())
-    },
+    created() {},
   }
 </script>
 
-<style scoped>
-  div {
-    text-align: center;
-  }
-</style>
+<style scoped></style>

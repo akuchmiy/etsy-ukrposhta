@@ -65,6 +65,7 @@
           .dispatch('api/getAccessCredentials', this.verifier)
           .then((response) => console.log(response))
           .then(() => this.$store.dispatch('receipts/getShopId'))
+          .then(() => this.$store.dispatch('receipts/getReceipts'))
       },
     },
     created() {
