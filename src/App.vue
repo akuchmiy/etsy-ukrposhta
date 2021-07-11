@@ -1,13 +1,16 @@
 <template>
   <Nav id="nav" class="mb-3"></Nav>
   <router-view />
+  <NotificationContainer></NotificationContainer>
 </template>
 
 <script>
   import Nav from '@/components/Nav.vue'
+  import NotificationContainer from '@/components/NotificationContainer.vue'
   export default {
     components: {
       Nav,
+      NotificationContainer,
     },
     created() {
       if (

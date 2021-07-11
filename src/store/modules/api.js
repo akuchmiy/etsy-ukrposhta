@@ -26,7 +26,7 @@ export default {
         commit('SET_CREDENTIALS', credentials)
       }
     },
-    getRequestCredentials({ state, commit }) {
+    getRequestCredentials({ state, dispatch, commit }) {
       return ApiService.getRequestToken(state.apiKey, state.sharedSecret)
         .then((response) => {
           commit('SET_REQUEST_CREDENTIALS', {
@@ -35,7 +35,17 @@ export default {
           })
           return { href: response.data.authorizeUrl }
         })
-        .catch(() => ({ href: '' }))
+        .catch((e) => {
+          dispatch(
+            'notifications/add',
+            {
+              message: e.message,
+              type: 'danger',
+            },
+            { root: true }
+          )
+          return { href: '' }
+        })
     },
     getAccessCredentials({ state, dispatch }, verifier) {
       return ApiService.getAccessToken(
