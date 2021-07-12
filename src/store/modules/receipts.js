@@ -4,18 +4,8 @@ export default {
   namespaced: true,
   state: () => ({
     shopId: null,
-    receipts: [
-      // {
-      //   receipt_id: '00001',
-      //   name: 'Tolik Sutuliy',
-      //   city: 'Dublin',
-      // },
-      // {
-      //   receipt_id: '00002',
-      //   name: 'Dima Makaron',
-      //   city: 'Helsinki',
-      // },
-    ],
+    receipts: [],
+    labels: ['name', 'city', 'country_id'],
   }),
   mutations: {
     SET_SHOP_ID(state, shopId) {
@@ -56,6 +46,7 @@ export default {
         state.shopId
       )
         .then((receipts) => {
+          // receipts = receipts.filter((receipt) => !receipt.was_shipped)
           commit('SET_RECEIPTS', receipts)
         })
         .catch((e) => {

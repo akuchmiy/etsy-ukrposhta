@@ -1,9 +1,14 @@
 <template>
-  <div class="card p-1">
+  <div class="card">
     <div class="card-body">
       <h3 class="card-title">
         {{ receipt.name }}
-        <span class="badge bg-secondary">{{ receipt.city }}</span>
+        <span class="badge bg-secondary">{{ receipt.city }}</span> |
+        <span
+          class="badge"
+          :class="receipt.was_shipped ? 'bg-success' : 'bg-danger'"
+          >{{ receipt.was_shipped ? 'Shipped' : 'Not shipped' }}</span
+        >
       </h3>
       <p class="card-text">{{}}</p>
       <div class="mb-3">
@@ -34,7 +39,7 @@
 </template>
 
 <script>
-  import { mapGetters } from 'vuex'
+  import { mapGetters, mapState } from 'vuex'
   export default {
     props: {
       receiptValue: Object,
@@ -43,10 +48,10 @@
       return {
         tag: 'p',
         receipt: this.receiptValue,
-        labels: ['city', 'name'],
       }
     },
     computed: {
+      ...mapState('receipts', ['labels']),
       inputClass() {
         if (this.tag === 'input') {
           return 'form-control-sm'

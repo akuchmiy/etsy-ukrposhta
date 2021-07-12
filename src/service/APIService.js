@@ -21,6 +21,7 @@ const serverClient = axios.create({
 
 serverClient.interceptors.request.use((config) => {
   NProgress.start()
+  setTimeout(() => NProgress.done(), 5000)
   return config
 })
 
