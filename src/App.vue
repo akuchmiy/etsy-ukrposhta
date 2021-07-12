@@ -14,11 +14,16 @@
     },
     created() {
       this.$store.dispatch('api/getLocalAccessCredentials')
+
       if (
         !window.location.href.endsWith('/authorization') &&
         !this.$store.state.api.accessToken
       ) {
         window.location.assign('/authorization')
+      } else {
+        this.$store
+          .dispatch('receipts/getShopId')
+          .then(() => this.$store.dispatch('receipts/getReceipts'))
       }
     },
   }

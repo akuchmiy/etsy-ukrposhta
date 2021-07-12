@@ -32,20 +32,42 @@ export default {
     },
   },
   actions: {
-    getShopId({ commit, rootState }) {
+    getShopId({ commit, dispatch, rootState }) {
       return ApiService.getUserShopId(
         rootState.api.accessToken,
         rootState.api.accessSecret
-      ).then((shopId) => commit('SET_SHOP_ID', shopId))
+      )
+        .then((shopId) => commit('SET_SHOP_ID', shopId))
+        .catch((e) => {
+          dispatch(
+            'notifications/add',
+            {
+              message: e.message,
+              type: 'danger',
+            },
+            { root: true }
+          )
+        })
     },
-    getReceipts({ state, commit, rootState }) {
+    getReceipts({ state, dispatch, commit, rootState }) {
       return ApiService.getShopReceipts(
         rootState.api.accessToken,
         rootState.api.accessSecret,
         state.shopId
-      ).then((receipts) => {
-        commit('SET_RECEIPTS', receipts)
-      })
+      )
+        .then((receipts) => {
+          commit('SET_RECEIPTS', receipts)
+        })
+        .catch((e) => {
+          dispatch(
+            'notifications/add',
+            {
+              message: e.message,
+              type: 'danger',
+            },
+            { root: true }
+          )
+        })
     },
     updateReceipt({ commit }, newReceipt) {
       if (!newReceipt.receipt_id) return

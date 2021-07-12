@@ -1,4 +1,5 @@
 import axios from 'axios'
+import NProgress from 'nprogress'
 
 // const apiClient = axios.create({
 //   baseURL: 'https://openapi.etsy.com/v2',
@@ -16,6 +17,17 @@ const serverClient = axios.create({
     Accept: 'application/json',
     'Content-Type': 'application/json',
   },
+})
+
+serverClient.interceptors.request.use((config) => {
+  NProgress.start()
+  return config
+})
+
+// before a response is returned stop nprogress
+serverClient.interceptors.response.use((response) => {
+  NProgress.done()
+  return response
 })
 
 export default {

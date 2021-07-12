@@ -8,7 +8,7 @@
       {{ accessToken }} <br />
       {{ accessSecret }}
     </p>
-    <div>
+    <div class="d-flex flex-column">
       <button class="refresh btn btn-primary mb-2" @click="refresh">
         Refresh
       </button>
@@ -38,5 +38,6 @@
 
 <style scoped>
   .refresh {
+    align-self: flex-end;
   }
 </style>
