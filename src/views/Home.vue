@@ -5,26 +5,20 @@
       {{ accessToken }} <br />
       {{ accessSecret }}
     </p>
-    <ReceiptItem
-      v-for="receipt of receipts"
-      :key="receipt.receipt_id"
-      :receiptValue="receipt"
-    ></ReceiptItem>
+    <ReceiptList></ReceiptList>
   </div>
 </template>
 
 <script>
-  import ReceiptItem from '@/components/ReceiptItem.vue'
   import { mapState } from 'vuex'
+  import ReceiptList from '@/components/ReceiptList.vue'
   export default {
     components: {
-      ReceiptItem,
+      ReceiptList,
     },
     computed: {
       ...mapState('api', ['accessToken', 'accessSecret']),
-      ...mapState('receipts', ['receipts']),
     },
-    created() {},
   }
 </script>
 
