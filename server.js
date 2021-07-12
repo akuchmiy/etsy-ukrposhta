@@ -8,18 +8,20 @@ const port = process.env.PORT || 8000
 const requestUrl = 'https://openapi.etsy.com/v2/oauth/request_token'
 const accessUrl = 'https://openapi.etsy.com/v2/oauth/access_token'
 const apiHostName = 'openapi.etsy.com'
-let client
+
+***REMOVED***
+***REMOVED***
+
+let client = new Client({
+  key: apiKey,
+  secret: sharedSecret,
+  requestUrl,
+  accessUrl,
+  apiHostName,
+})
 
 app.get('/request', function (req, res) {
-  let { api_key: apiKey, shared_secret: sharedSecret } = req.query
-
-  client = new Client({
-    key: apiKey,
-    secret: sharedSecret,
-    requestUrl,
-    accessUrl,
-    apiHostName,
-  })
+  // let { api_key: apiKey, shared_secret: sharedSecret } = req.query
 
   client
     .requestToken()
