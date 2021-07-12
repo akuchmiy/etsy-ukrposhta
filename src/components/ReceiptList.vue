@@ -1,6 +1,7 @@
 <template>
-  <div class="receipt-list">
+  <div class="receipt__list">
     <ReceiptListItem
+      class="receipt__list-item"
       v-for="receipt of receipts"
       :key="receipt.receipt_id"
       :receiptValue="receipt"
@@ -22,4 +23,8 @@
   }
 </script>
 
-<style></style>
+<style>
+  .receipt__list .receipt__list-item {
+    margin-bottom: 5px;
+  }
+</style>

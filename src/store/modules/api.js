@@ -18,6 +18,8 @@ export default {
     SET_CREDENTIALS(state, credentials) {
       state.accessToken = credentials.accessToken
       state.accessSecret = credentials.accessSecret
+      localStorage.setItem('accessToken', credentials.accessToken)
+      localStorage.setItem('accessSecret', credentials.accessSecret)
     },
   },
   actions: {
@@ -61,6 +63,16 @@ export default {
           return { success: true }
         })
         .catch(() => ({ success: false }))
+    },
+    getLocalAccessCredentials({ dispatch }) {
+      const accessToken = localStorage.getItem('accessToken')
+      const accessSecret = localStorage.getItem('accessSecret')
+      console.log('Access:')
+      console.table(accessToken, accessSecret)
+      dispatch('setCredentials', {
+        accessToken,
+        accessSecret,
+      })
     },
   },
 }

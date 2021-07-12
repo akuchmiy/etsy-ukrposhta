@@ -61,7 +61,6 @@
     methods: {
       change() {
         if (this.isInput) {
-          console.log('YOYO')
           this.$store.dispatch('receipts/updateReceipt', this.receipt)
           this.receipt = this.getReceiptById(this.receipt.receipt_id)
           this.tag = 'p'
@@ -72,7 +71,6 @@
       changeValue(e) {
         const labelName = e.target.name
         this.receipt[labelName] = e.target.value
-        console.log(this.receipt)
       },
       camelLabel(label) {
         return label.charAt(0).toUpperCase() + label.slice(1)

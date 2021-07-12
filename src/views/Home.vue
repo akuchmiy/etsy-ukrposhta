@@ -1,16 +1,24 @@
 <template>
   <div class="container home">
-    <h1 class="text-center">Receipts</h1>
+    <div class="title">
+      <h1 class="text-center">Receipts</h1>
+    </div>
+    <div class=""></div>
     <p>
       {{ accessToken }} <br />
       {{ accessSecret }}
     </p>
-    <ReceiptList></ReceiptList>
+    <div>
+      <button class="refresh btn btn-primary mb-2" @click="refresh">
+        Refresh
+      </button>
+      <ReceiptList></ReceiptList>
+    </div>
   </div>
 </template>
 
 <script>
-  import { mapState } from 'vuex'
+  import { mapState, mapActions } from 'vuex'
   import ReceiptList from '@/components/ReceiptList.vue'
   export default {
     components: {
@@ -19,7 +27,16 @@
     computed: {
       ...mapState('api', ['accessToken', 'accessSecret']),
     },
+    methods: {
+      ...mapActions('receipts', ['getShopId', 'getReceipts']),
+      refresh() {
+        this.getShopId().then(() => this.getReceipts())
+      },
+    },
   }
 </script>
 
-<style scoped></style>
+<style scoped>
+  .refresh {
+  }
+</style>

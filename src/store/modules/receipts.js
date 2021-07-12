@@ -10,6 +10,11 @@ export default {
       //   name: 'Tolik Sutuliy',
       //   city: 'Dublin',
       // },
+      // {
+      //   receipt_id: '00002',
+      //   name: 'Dima Makaron',
+      //   city: 'Helsinki',
+      // },
     ],
   }),
   mutations: {
@@ -42,12 +47,9 @@ export default {
         commit('SET_RECEIPTS', receipts)
       })
     },
-    updateReceipt({ state, commit }, newReceipt) {
+    updateReceipt({ commit }, newReceipt) {
       if (!newReceipt.receipt_id) return
-
-      console.log('Hi from updateReceipt', newReceipt)
       commit('UPDATE_RECEIPT', newReceipt)
-      console.log(state.receipts)
     },
   },
   getters: {

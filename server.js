@@ -12,7 +12,6 @@ let client
 
 app.get('/request', function (req, res) {
   let { api_key: apiKey, shared_secret: sharedSecret } = req.query
-  console.log(apiKey, sharedSecret)
 
   client = new Client({
     key: apiKey,
@@ -31,7 +30,6 @@ app.get('/request', function (req, res) {
 })
 
 app.get('/access', function (req, res) {
-  console.log(client)
   let {
     req_token: requestToken,
     req_secret: requestSecret,
@@ -47,7 +45,6 @@ app.get('/access', function (req, res) {
 })
 
 app.get('/get', function (req, res) {
-  console.log(client)
   let {
     path,
     token,

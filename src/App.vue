@@ -13,6 +13,7 @@
       NotificationContainer,
     },
     created() {
+      this.$store.dispatch('api/getLocalAccessCredentials')
       if (
         !window.location.href.endsWith('/authorization') &&
         !this.$store.state.api.accessToken
