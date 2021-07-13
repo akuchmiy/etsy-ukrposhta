@@ -1,5 +1,5 @@
 <template>
-  <div class="card">
+  <div class="receipt__list-item card">
     <div class="card-body">
       <h3 class="card-title">
         {{ receipt.name }} , {{ countries.get(receipt.country_id) }}

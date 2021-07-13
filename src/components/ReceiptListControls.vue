@@ -45,10 +45,10 @@
 </script>
 
 <style>
-  .buttons {
+  /* .buttons {
     margin: 0 -5px;
   }
   .buttons > * {
     margin: 0 5px;
-  }
+  } */
 </style>

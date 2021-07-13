@@ -1,11 +1,17 @@
 <template>
   <div class="d-flex flex-column">
     <ReceiptListControls @change="filterReceipts"></ReceiptListControls>
-    <div class="receipt__list">
+    <div
+      class="receipt__list row mb-2 g-0"
+      v-for="receipt of receipts"
+      :key="receipt.receipt_id"
+    >
+      <ReceiptListCheckBox
+        class="col-2 col-md-1"
+        :receiptId="receipt.receipt_id"
+      ></ReceiptListCheckBox>
       <ReceiptListItem
-        class="receipt__list-item mb-2"
-        v-for="receipt of receipts"
-        :key="receipt.receipt_id"
+        class="col-10 col-md-11"
         :receipt="receipt"
       ></ReceiptListItem>
     </div>
@@ -15,11 +21,13 @@
 <script>
   import ReceiptListItem from '@/components/ReceiptListItem.vue'
   import ReceiptListControls from '@/components/ReceiptListControls.vue'
+  import ReceiptListCheckBox from '@/components/ReceiptListCheckBox.vue'
   import { mapState } from 'vuex'
   export default {
     components: {
       ReceiptListItem,
       ReceiptListControls,
+      ReceiptListCheckBox,
     },
     data() {
       return {
@@ -46,8 +54,4 @@
   }
 </script>
 
-<style>
-  /* .receipt__list .receipt__list-item {
-    margin-bottom: 5px;
-  } */
-</style>
+<style></style>
