@@ -5,7 +5,19 @@ export default {
   state: () => ({
     shopId: null,
     receipts: [],
-    labels: ['name', 'city', 'country_id'],
+    labels: [
+      'name',
+      'city',
+      'country_id',
+      'first_line',
+      'second_line',
+      'state',
+      'zip',
+      'subtotal',
+      'grandtotal',
+      'adjusted_grandtotal',
+      'buyer_adjusted_grandtotal',
+    ],
   }),
   mutations: {
     SET_SHOP_ID(state, shopId) {

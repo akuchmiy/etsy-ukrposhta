@@ -3,9 +3,8 @@
     <div class="card-body">
       <h3 class="card-title">
         {{ receipt.name }}
-        <span class="badge bg-secondary">{{ receipt.city }}</span> |
         <span
-          class="badge"
+          class="badge rounded-pill"
           :class="receipt.was_shipped ? 'bg-success' : 'bg-danger'"
           >{{ receipt.was_shipped ? 'Shipped' : 'Not shipped' }}</span
         >
@@ -39,15 +38,15 @@
 </template>
 
 <script>
-  import { mapGetters, mapState } from 'vuex'
+  import { mapState } from 'vuex'
   export default {
     props: {
-      receiptValue: Object,
+      receipt: Object,
     },
     data() {
       return {
         tag: 'p',
-        receipt: this.receiptValue,
+        updatedReceipt: { receipt_id: this.receipt.receipt_id },
       }
     },
     computed: {
@@ -61,13 +60,11 @@
       isInput() {
         return this.tag === 'input'
       },
-      ...mapGetters('receipts', ['getReceiptById']),
     },
     methods: {
       change() {
         if (this.isInput) {
-          this.$store.dispatch('receipts/updateReceipt', this.receipt)
-          this.receipt = this.getReceiptById(this.receipt.receipt_id)
+          this.$store.dispatch('receipts/updateReceipt', this.updatedReceipt)
           this.tag = 'p'
         } else {
           this.tag = 'input'
@@ -75,7 +72,7 @@
       },
       changeValue(e) {
         const labelName = e.target.name
-        this.receipt[labelName] = e.target.value
+        this.updatedReceipt[labelName] = e.target.value
       },
       camelLabel(label) {
         return label.charAt(0).toUpperCase() + label.slice(1)

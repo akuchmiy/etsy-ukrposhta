@@ -6,7 +6,7 @@
         class="receipt__list-item mb-2"
         v-for="receipt of receipts"
         :key="receipt.receipt_id"
-        :receiptValue="receipt"
+        :receipt="receipt"
       ></ReceiptListItem>
     </div>
   </div>

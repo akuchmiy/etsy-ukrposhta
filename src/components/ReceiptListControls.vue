@@ -1,12 +1,12 @@
 <template>
-  <div class="buttons row mb-3 g-0">
+  <div class="buttons row mb-3 g-0 justify-content-between">
     <select class="form-select col-auto w-25" @change="selectChange">
       <option value="all">All</option>
       <option value="shipped">Shipped</option>
       <option value="unshipped">Not Shipped</option>
     </select>
     <button class="refresh btn btn-primary col-auto" @click="refresh">
-      Refresh
+      Reload
     </button>
   </div>
 </template>
