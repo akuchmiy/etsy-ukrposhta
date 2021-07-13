@@ -73,4 +73,16 @@ export default {
       })
       .then((result) => result.data.body.results)
   },
+  getCountries(token, secret) {
+    return serverClient
+      .get('/get', {
+        params: {
+          path: `/countries`,
+          token,
+          secret,
+          query: null,
+        },
+      })
+      .then((countries) => countries.data.body.results)
+  },
 }

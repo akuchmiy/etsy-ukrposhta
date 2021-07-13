@@ -24,6 +24,7 @@
         this.$store
           .dispatch('receipts/getShopId')
           .then(() => this.$store.dispatch('receipts/getReceipts'))
+          .then(() => this.$store.dispatch('receipts/getCountries'))
       }
     },
   }

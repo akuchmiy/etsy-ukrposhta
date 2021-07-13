@@ -2,7 +2,7 @@
   <div class="card">
     <div class="card-body">
       <h3 class="card-title">
-        {{ receipt.name }}
+        {{ receipt.name }} , {{ countries.get(receipt.country_id) }}
         <span
           class="badge rounded-pill"
           :class="receipt.was_shipped ? 'bg-success' : 'bg-danger'"
@@ -50,7 +50,7 @@
       }
     },
     computed: {
-      ...mapState('receipts', ['labels']),
+      ...mapState('receipts', ['labels', 'countries']),
       inputClass() {
         if (this.tag === 'input') {
           return 'form-control-sm'

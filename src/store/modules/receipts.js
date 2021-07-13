@@ -8,17 +8,18 @@ export default {
     labels: [
       'name',
       'city',
-      'country_id',
+      // 'country_id',
+      'formatted_address',
       'first_line',
       'second_line',
       'state',
       'zip',
       'subtotal',
       'grandtotal',
-      'adjusted_grandtotal',
-      'buyer_adjusted_grandtotal',
-      'formatted_address',
+      // 'adjusted_grandtotal',
+      // 'buyer_adjusted_grandtotal',
     ],
+    countries: new Map(),
   }),
   mutations: {
     SET_SHOP_ID(state, shopId) {
@@ -32,6 +33,11 @@ export default {
         (receipt) => receipt.receipt_id === newReceipt.receipt_id
       )
       Object.assign(receipt, newReceipt)
+    },
+    SET_COUNTRIES(state, countries) {
+      for (let country of countries) {
+        state.countries.set(country.country_id, country.iso_country_code)
+      }
     },
   },
   actions: {
@@ -76,6 +82,12 @@ export default {
     updateReceipt({ commit }, newReceipt) {
       if (!newReceipt.receipt_id) return
       commit('UPDATE_RECEIPT', newReceipt)
+    },
+    getCountries({ commit, rootState }) {
+      ApiService.getCountries(
+        rootState.api.accessToken,
+        rootState.api.accessSecret
+      ).then((countries) => commit('SET_COUNTRIES', countries))
     },
   },
   getters: {
