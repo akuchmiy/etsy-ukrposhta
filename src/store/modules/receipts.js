@@ -17,6 +17,7 @@ export default {
       'grandtotal',
       'adjusted_grandtotal',
       'buyer_adjusted_grandtotal',
+      'formatted_address',
     ],
   }),
   mutations: {

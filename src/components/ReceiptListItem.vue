@@ -16,7 +16,7 @@
           v-for="label of labels"
           :key="label"
         >
-          <label class="col-3">
+          <label class="col-5 col-lg-3">
             <b>{{ camelLabel(label) }}</b></label
           >
           <component

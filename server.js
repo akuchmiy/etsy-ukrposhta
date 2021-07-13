@@ -22,7 +22,7 @@ let client = new Client({
 
 app.get('/request', function (req, res) {
   // let { api_key: apiKey, shared_secret: sharedSecret } = req.query
-
+  // res.set('Access-Control-Allow-Origin', '*')
   client
     .requestToken()
     .then((result) => {
