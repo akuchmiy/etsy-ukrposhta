@@ -1,6 +1,9 @@
 <template>
   <div class="d-flex flex-column">
-    <ReceiptListControls @change="filterReceipts"></ReceiptListControls>
+    <ReceiptListControls
+      @change="filterReceipts"
+      @select="selectAllReceipts"
+    ></ReceiptListControls>
     <div
       class="receipt__list row mb-2 g-0"
       v-for="receipt of receipts"
@@ -32,6 +35,7 @@
     data() {
       return {
         option: null,
+        selected: false,
       }
     },
     computed: {
@@ -49,6 +53,14 @@
     methods: {
       filterReceipts(option) {
         this.option = option
+      },
+      selectAllReceipts() {
+        this.receipts.forEach((receipt) => {
+          this.$store.commit('receipts/UPDATE_RECEIPT', {
+            ...receipt,
+            send_to_ukrposhta: !receipt.send_to_ukrposhta,
+          })
+        })
       },
     },
   }
