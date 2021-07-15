@@ -9,12 +9,9 @@ const requestUrl = 'https://openapi.etsy.com/v2/oauth/request_token'
 const accessUrl = 'https://openapi.etsy.com/v2/oauth/access_token'
 const apiHostName = 'openapi.etsy.com'
 
-***REMOVED***
-***REMOVED***
-
 let client = new Client({
-  key: apiKey,
-  secret: sharedSecret,
+  key: process.env.API_KEY,
+  secret: process.env.SHARED_SECRET,
   requestUrl,
   accessUrl,
   apiHostName,

@@ -3,8 +3,6 @@ import ApiService from '@/service/APIService.js'
 export default {
   namespaced: true,
   state: () => ({
-    ***REMOVED***
-    ***REMOVED***
     reqToken: '',
     reqSecret: '',
     accessToken: '',
