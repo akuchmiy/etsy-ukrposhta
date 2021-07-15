@@ -3,29 +3,19 @@
     <input
       class="receipt__list-checkbox form-check-input"
       type="checkbox"
-      :value="send_to_ukrposhta"
-      :checked="checked"
+      :value="receipt.send_to_ukrposhta"
+      :checked="receipt.send_to_ukrposhta"
       @change="updateReceipt"
     />
   </div>
 </template>
 
 <script>
-  import { mapState } from 'vuex'
   export default {
     props: {
-      receiptId: Number,
+      receipt: Object,
     },
-    computed: {
-      ...mapState({
-        send_to_ukrposhta(state) {
-          const receipt = state.receipts.receipts.find(
-            (receipt) => receipt.receipt_id === this.receiptId
-          )
-          if (!receipt.send_to_ukrposhta) return false
-          return receipt.send_to_ukrposhta
-        },
-      }),
+    compuded: {
       checked() {
         return this.send_to_ukrposhta
       },
@@ -33,16 +23,11 @@
     methods: {
       updateReceipt() {
         this.$store.commit('receipts/UPDATE_RECEIPT', {
-          receipt_id: this.receiptId,
-          send_to_ukrposhta: !this.send_to_ukrposhta,
+          receipt_id: this.receipt.receipt_id,
+          send_to_ukrposhta: !this.receipt.send_to_ukrposhta,
         })
       },
     },
-    // mounted() {
-    //   const send = this.getReceiptById(this.receiptId).send_to_ukrposhta
-    //   if (!send) return
-    //   this.send_to_ukrposhta = send
-    // },
   }
 </script>
 

@@ -11,7 +11,7 @@
     >
       <ReceiptListCheckBox
         class="col-2 col-md-1"
-        :receiptId="receipt.receipt_id"
+        :receipt="receipt"
       ></ReceiptListCheckBox>
       <ReceiptListItem
         class="col-10 col-md-11"
