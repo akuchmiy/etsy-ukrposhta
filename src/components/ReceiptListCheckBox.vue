@@ -15,11 +15,6 @@
     props: {
       receipt: Object,
     },
-    compuded: {
-      checked() {
-        return this.send_to_ukrposhta
-      },
-    },
     methods: {
       updateReceipt() {
         this.$store.commit('receipts/UPDATE_RECEIPT', {

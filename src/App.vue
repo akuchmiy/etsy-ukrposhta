@@ -1,5 +1,5 @@
 <template>
-  <Nav id="nav" class="mb-3"></Nav>
+  <TheNav id="nav" class="mb-3"></TheNav>
   <router-view v-slot="{ Component }">
     <transition name="fade" mode="out-in">
       <component :is="Component"></component>
@@ -9,11 +9,11 @@
 </template>
 
 <script>
-  import Nav from '@/components/Nav.vue'
+  import TheNav from '@/components/TheNav.vue'
   import NotificationContainer from '@/components/NotificationContainer.vue'
   export default {
     components: {
-      Nav,
+      TheNav,
       NotificationContainer,
     },
     created() {

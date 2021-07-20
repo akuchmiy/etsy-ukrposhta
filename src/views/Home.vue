@@ -13,7 +13,6 @@
     components: {
       ReceiptList,
     },
-    computed: {},
   }
 </script>
 
