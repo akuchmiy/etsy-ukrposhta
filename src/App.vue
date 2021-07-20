@@ -1,6 +1,10 @@
 <template>
   <Nav id="nav" class="mb-3"></Nav>
-  <router-view />
+  <router-view v-slot="{ Component }">
+    <transition name="fade" mode="out-in">
+      <component :is="Component"></component>
+    </transition>
+  </router-view>
   <NotificationContainer></NotificationContainer>
 </template>
 
@@ -14,12 +18,11 @@
     },
     created() {
       this.$store.dispatch('api/getLocalAccessCredentials')
-
       if (
-        !window.location.href.endsWith('/authorization') &&
+        this.$route.path !== '/authorization' &&
         !this.$store.state.api.accessToken
       ) {
-        window.location.assign('/authorization')
+        this.$router.push('/authorization')
       } else {
         this.$store
           .dispatch('receipts/getShopId')
@@ -34,5 +37,19 @@
   #app {
     font-family: Avenir, Helvetica, Arial, sans-serif;
     color: #2c3e50;
+  }
+  .fade-enter-active,
+  .fade-leave-active {
+    transition: all 0.4s;
+  }
+
+  .fade-enter-from {
+    opacity: 0.4;
+    transform: translate(-100%, 0);
+  }
+
+  .fade-leave-to {
+    opacity: 0.4;
+    transform: translate(100%, 0);
   }
 </style>
